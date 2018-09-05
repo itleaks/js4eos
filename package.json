@@ -1,0 +1,26 @@
+{
+  "name": "js4eos",
+  "version": "1.0.3",
+  "license": "MIT",
+  "preferGlobal": true,
+  "main": "index.js",
+  "bin": {
+    "js4eos": "js4eos"
+  },
+  "repository": "https://github.com/itleaks/js4eos",
+  "scripts": {
+    "test": "node dev-demo.js"
+  },
+  "keywords": [
+    "eos",
+    "javascript eos",
+    "eos cleos",
+    "eos client"
+  ],
+  "dependencies": {
+    "eosjs": "^16.0.6",
+    "eosjs-ecc": "^4.0.4",
+    "open": "^0.0.5",
+    "yargs": "^7.0.2"
+  }
+}
