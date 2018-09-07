@@ -12,6 +12,15 @@ js4eos config  set --chainid=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeae
 js4eos config  set --chainid=bd61ae3a031e8ef2f97ee3b0e62776d6d30d4833c8f7c1645c657b149151004b --url=http://47.97.115.84:8888
 ```
 
+# ENU牛油果
+```
+js4eos config  set --chainid=cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f --url=http://enu.mytokenpocket.vip --keyprefix='ENU'
+```
+
+# FIBOS
+```
+js4eos config  set --chainid=5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191 --url=http://se-rpc.fibos.io:8870 --keyprefix='FO'
+```
 
 # jungle测试网络(jungle testnet)
 
@@ -19,6 +28,8 @@ js4eos config  set --chainid=bd61ae3a031e8ef2f97ee3b0e62776d6d30d4833c8f7c1645c6
 js4eos config  set --chainid=038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca --url=http://193.93.219.219:8888
 ```
 
-# ENU牛油果(整理中)
-# FIBOS（整理中)
+# 麒麟测试网络(cryptokylin testnet)
 
+```
+js4eos config  set --chainid=5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191 --url=http://api-kylin.eoshenzhen.io:8890
+```

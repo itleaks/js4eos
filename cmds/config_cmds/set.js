@@ -14,6 +14,11 @@ exports.builder = yargs => yargs
         desc:"network chainid",
         type:'string',
     })
+    .options("p", {
+        alias:'keyprefix',
+        desc:"public key prefix",
+        type:'string',
+    })
     .options("u", {
         alias:'url',
         desc:"network endpoint",
@@ -27,6 +32,10 @@ exports.handler = function (argv) {
     }
     if (argv.url) {
         config.httpEndpoint = argv.url;
+    }
+
+    if (argv.keyprefix) {
+        config.keyPrefix = argv.keyprefix;
     }
     // Js4Eos.printJson(config)
     Js4Eos.saveConfig(config)
