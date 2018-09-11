@@ -1,18 +1,18 @@
-其实很早就想做一个简化EOS操作的项目了，因为EOS探索过程遇到太多朋友咨询EOS编译问题，EOS更新导致操作错误问题。这还是那些有一定编程基础的伙伴，对于"小白"用户就更难了。昨天终于有时间实现了，用户只需通过npm一键安装js4eos,后面就可以通过js4eos玩转EOS生态了。且通过切换网络，可以很便捷的玩转其他EOS生态链。
+其实很早就想做一个简化EOS操作的项目了，因为EOS探索过程遇到太多朋友咨询EOS编译问题，EOS更新导致操作错误问题。这还是那些有一定编程基础的伙伴，对于"小白"用户就更难了。昨天终于有时间实现了，用户只需通过npm一键安装js4eos,后面就可以通过js4eos玩转EOS生态了。且通过切换网络，可以很便捷的玩转其他EOS生态链。
 
 # js4eos
 
 js4eos is a Command Line javascript Application for EOS<br>
-js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。
+js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。
 
-# EOS“日常操作”用户
+# EOS“日常操作”用户
 
 对于只是进行EOS日常操作(转账，调用action)的用户来说，只需安装js4eos执行程序即可。(ubuntu需要sudo)
 
 ```
 npm install js4eos -g
 ```
-然后就可以使用js4eos执行EOS cleos程序的操作，
+然后就可以使用js4eos执行EOS cleos程序的操作，
 比如
 ## 创建私钥
 ```
