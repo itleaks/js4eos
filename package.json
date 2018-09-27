@@ -1,11 +1,12 @@
 {
   "name": "js4eos",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "preferGlobal": true,
   "main": "index.js",
   "bin": {
-    "js4eos": "js4eos"
+    "js4eos": "js4eos",
+    "js4eos_bg": "js4eos_bg"
   },
   "repository": "https://github.com/itleaks/js4eos",
   "scripts": {
@@ -18,9 +19,12 @@
     "eos client"
   ],
   "dependencies": {
-    "eosjs": "^16.0.6",
-    "eosjs-ecc": "^4.0.4",
+    "daemonize2": "^0.4.2",
+    "eosjs": "16.0.6",
     "open": "^0.0.5",
+    "query-string": "^6.2.0",
+    "readline-sync": "^1.4.9",
+    "request": "^2.88.0",
     "yargs": "^7.0.2"
   }
 }
