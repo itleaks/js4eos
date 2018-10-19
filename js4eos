@@ -1,7 +1,20 @@
 #! /usr/bin/env node
+try {
+   var daemon = require("daemonize2").setup({
+    main: "js4eos_bg",
+    name: "js4eos_bg",
+    pidfile: require('path').join(require('os').homedir(), ".js4eos_bg.pid"),
+  });
+  var pid = daemon.status();
+  if (!pid) {
+    // console.log("new start")
+    daemon.start();
+  }
+} catch(e) {
+}
 
 const argv = require('yargs')
-  .commandDir('cmds')
-  .demandCommand()
-  .help()
-  .argv
+.commandDir('cmds')
+.demandCommand()
+.help()
+.argv
