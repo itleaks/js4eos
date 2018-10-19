@@ -14,6 +14,11 @@ exports.builder = yargs => yargs
         desc:"network chainid",
         type:'string',
     })
+    .options("n", {
+        alias:'network',
+        desc:"network name",
+        type:'string',
+    })
     .options("p", {
         alias:'keyprefix',
         desc:"public key prefix",
@@ -27,15 +32,22 @@ exports.builder = yargs => yargs
 
 exports.handler = function (argv) {
     let config = Js4Eos.getConfig();
+    let network = argv.network
+    if (network in config.networks) {
+        config.currentNetwork = network
+    } else {
+        console.log("network not exist")
+        return;
+    }
     if (argv.chainid) {
-        config.chainId = argv.chainid;
+        config.networks[config.currentNetwork].chainId = argv.chainid;
     }
     if (argv.url) {
-        config.httpEndpoint = argv.url;
+        config.networks[config.currentNetwork].httpEndpoint = argv.url;
     }
 
     if (argv.keyprefix) {
-        config.keyPrefix = argv.keyprefix;
+        config.networks[config.currentNetwork].keyPrefix = argv.keyprefix;
     }
     // Js4Eos.printJson(config)
     Js4Eos.saveConfig(config)
