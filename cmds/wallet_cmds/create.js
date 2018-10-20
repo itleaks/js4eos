@@ -10,5 +10,5 @@ exports.command = 'create'
 exports.desc = 'create default wallet'
 exports.builder = {}
 exports.handler = function (argv) {
-    Js4Eos.create().then(ret => Js4Eos.printJson(ret));
+    Js4Eos.createWallet().then(ret => Js4Eos.printJson(ret));
 }

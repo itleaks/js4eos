@@ -14,5 +14,5 @@ exports.handler = function (argv) {
     var passwd = readline.question("passwd> ", {
         hideEchoBack: true // The typed text on screen is hidden by `*` (default).
     });
-    Js4Eos.unlock(passwd).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.unlockWallet(passwd).then(ret => Js4Eos.printJson(ret));
 }
