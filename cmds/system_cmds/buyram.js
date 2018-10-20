@@ -15,5 +15,5 @@ exports.handler = function (argv) {
         argv.payer,
         argv.receiver,
         argv.tokens,
-    ).then(ret => Js4Eos.printJson(ret));
+    ).then(ret => Js4Eos.printTransaction(ret));
 }

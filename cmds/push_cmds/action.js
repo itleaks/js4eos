@@ -16,5 +16,5 @@ exports.builder = yargs => yargs
     default:false,
 })
 exports.handler = function (argv) {
-    Js4Eos.pushRawAction(argv.contract, argv.action, argv.data, argv.p).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.pushRawAction(argv.contract, argv.action, argv.data, argv.p).then(ret => Js4Eos.printTransaction(ret));
 }

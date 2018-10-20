@@ -49,5 +49,5 @@ exports.handler = function (argv) {
         argv.buyRam,
         argv.buyRamKbytes*1000,
         argv.transfer ? 1:0
-    ).then(ret => Js4Eos.printJson(ret));
+    ).then(ret => Js4Eos.printTransaction(ret));
 }

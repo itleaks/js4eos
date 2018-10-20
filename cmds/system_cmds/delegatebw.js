@@ -24,5 +24,5 @@ exports.handler = function (argv) {
         argv.stake_net_quantity,
         argv.stake_cpu_quantity, argv.transfer ? 1 : 0,
         argv.permission
-    ).then(ret => Js4Eos.printJson(ret));
+    ).then(ret => Js4Eos.printTransaction(ret));
 }

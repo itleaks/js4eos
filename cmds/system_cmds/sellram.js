@@ -13,5 +13,5 @@ exports.handler = function (argv) {
     Js4Eos.sellRam(
         argv.accountr,
         argv.bytes,
-    ).then(ret => Js4Eos.printJson(ret));
+    ).then(ret => Js4Eos.printTransaction(ret));
 }

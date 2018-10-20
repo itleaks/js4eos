@@ -33,7 +33,9 @@ exports.builder = yargs => yargs
 exports.handler = function (argv) {
     let config = Js4Eos.getConfig();
     let network = argv.network
-    if (network in config.networks) {
+    if (!network) {
+        //Do nothing
+    } else if (network in config.networks) {
         config.currentNetwork = network
     } else {
         console.log("network not exist")
