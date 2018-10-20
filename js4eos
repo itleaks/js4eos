@@ -1,4 +1,12 @@
 #! /usr/bin/env node
+
+function startCmd() {
+  const argv = require('yargs')
+  .commandDir('cmds')
+  .demandCommand()
+  .help()
+  .argv
+}
 try {
    var daemon = require("daemonize2").setup({
     main: "js4eos_bg",
@@ -9,12 +17,11 @@ try {
   if (!pid) {
     // console.log("new start")
     daemon.start();
+    daemon.on('started', () => {
+      startCmd();
+    });
+  } else {
+    startCmd();
   }
 } catch(e) {
 }
-
-const argv = require('yargs')
-.commandDir('cmds')
-.demandCommand()
-.help()
-.argv
