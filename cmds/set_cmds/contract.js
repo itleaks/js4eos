@@ -10,5 +10,5 @@ exports.command = 'contract <account> <dir>'
 exports.desc = 'Create or update the contract on an account'
 exports.builder = {}
 exports.handler = function (argv) {
-    Js4Eos.setContract(argv.account, argv.dir).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.setContract(argv.account, argv.dir).then(ret => Js4Eos.printTransaction(ret));
 }

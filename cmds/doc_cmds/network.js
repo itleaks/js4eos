@@ -11,5 +11,5 @@ exports.command = 'network'
 exports.desc = 'show eos network'
 exports.builder = {}
 exports.handler = function (argv) {
-    open("https://github.com/itleaks/js4eos/blob/master/files/networks.md");
+    open("https://github.com/itleaks/js4eos/blob/master/docs/networks.md");
 }
