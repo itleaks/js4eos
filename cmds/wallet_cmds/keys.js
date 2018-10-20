@@ -6,7 +6,7 @@
 
 const Js4Eos = require('../../lib')
 
-exports.command = 'list'
+exports.command = 'keys'
 exports.desc = 'list keys'
 exports.builder = {}
 exports.handler = function (argv) {
