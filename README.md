@@ -5,62 +5,85 @@
 js4eos is a Command Line javascript Application for EOS<br>
 js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。
 
-# EOS“日常操作”用户
-
-对于只是进行EOS日常操作(转账，调用action)的用户来说，只需安装js4eos执行程序即可。(ubuntu需要sudo)
-
+# 安装js4eos
 ```
 npm install js4eos -g
 ```
-然后就可以使用js4eos执行EOS cleos程序的操作，
-比如
-## 创建私钥
+然后就可以使用js4eos执行EOS cleos程序的相似操作，比如
+# 创建钱包
+js4eos只支持一个钱包，钱包可以管理很多key(账号)
+```
+js4eos wallet create
+```
+# 解锁钱包
+js4eos的钱包是加密的，解锁前必须输入创建钱包时输出的密码
+```
+js4eos wallet unlock
+```
+# 创建私钥
 ```
 js4eos create key
 ```
-## 转账
-
+# 导入私钥
+导入私钥前必须解锁钱包
+```
+js4eos wallet unlock （然后输入钱包的密码）
+js4eos wallet import key
+```
+# 转账
 ```
 js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
 ```
-## 其他接口
+# 编译智能合约
+目前只支持单个文件的编译。
+## 编译wasm程序
+```
+js4eos compile -o xxx.wasm xxx.cpp
+```
+## 生成abi文件
+```
+js4eos compile -g xxx.abi xxx.cpp
+```
+# 部署智能合约
+```
+js4eos set contract xxx
+```
+xxx是目录，里面必须包含xxx.wasm和xxx.abi两个文件
+
+# 其他接口
 其他接口和EOS的cleos一模一样(包括参数名字传递方式)
 
-## 新增的接口
-js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以
-切换EOS网络。
-### 切到测试网络
-比如从主网切到测试网络,只需更改chainid和url即可
-
+# 新增的接口
+js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以切换EOS网络。]可通过下面的命令来切换到不同网络
+## 切换不同EOS链
+比如在测试网络jungle,kylin麒麟和主网之间切换
 ```
-js4eos config set --chainid=038f4b0fc8ff18a4f0842a8f0564611f6e96e8535901dd45e43ac8691a1c4dca --url=http://193.93.219.219:8888
-```
-### 切换到fibos
-ENU, fibos修改了公钥前缀，因而需要通过keyprefix指定前缀
-```
-js4eos config  set --chainid=5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191 --url=http://se-rpc.fibos.io:8870 --keyprefix='FO'
+js4eos config set --network mainnet/kylin/jungle/enu/fibos
 ```
 
-# EOS javascript开发用户
-
+## 修改当前网络参数（比如chainid, httpend的url)
+以下命令会更改当前网络的参数
 ```
-npm install js4eos
+js4eos config  set --chainid=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 --url=http://bp.cryptolions.io:8888
 ```
-然后参考js4eos库里的dev-demo.js使用js4eos
-
+## 切换网络，同时修改该网络的参数
+下面命令就会切换到mainnnet网络并且修改该网络参数
 ```
-var Js4Eos = require('js4eos')
-let info = await Js4Eos.getInfo();
-Js4Eos.printJson(info)
-let key = await Js4Eos.createKey();
+js4eos config  set --network mainnet --chainid=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 --url=http://bp.cryptolions.io:8888
 ```
-
+## 同步网络信息
+由于httpendpoint有时可能会失效，我们的服务器会不定时更新节点信息，所以本地需要时可以通过config sync来同步
+```
+js4eos config sync
+```
 # 文档查看(EOS网络切换文档)
 目前js4eos支持主网，EosForce, 测试网络，ENU和FIBOS也在整理即将支持。切换网络就是修改chainid和httpEndpoint,具体操作详情请使用doc network命令查看
 
 ```
 js4eos doc network
 ```
+# 水龙头(创建第一个账号)
+由于EOS操作的复杂性，任何一个EOS公链侧链账号注册是一个高门槛。因而js4eos配置了水龙头功能，只需执行js4eos faucet youraccount，"youraccount"为你要注册的新账号
 
 # 常用命令解读
 下图的EOS请替换为具体网络的币符号
