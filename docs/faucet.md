@@ -26,11 +26,8 @@ http://faucet.cryptokylin.io/get_token?xxxx
 ## 创建免费账号
 ```
 js4eos config set -n jungle
-js4eos create key
+js4eos faucet anewaccount1
 ```
-浏览器输入
-http://jungle.cryptolions.io/#account
-填入账号名及上面js4eos生成的公钥
 
 ## 免费获得Token
 浏览器输入

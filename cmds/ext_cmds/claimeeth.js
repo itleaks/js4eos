@@ -8,7 +8,7 @@ const Js4Eos = require('../../lib')
 const Request = require('../../lib/request')
 
 exports.command = 'claimeeth <account>'
-exports.desc = 'claim token eeth for free'
+exports.desc = 'claim token eeth, it will eat 0.24k RAM once'
 exports.builder = {}
 async function process(argv) {
     try {
