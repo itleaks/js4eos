@@ -6,7 +6,8 @@
   "main": "index.js",
   "bin": {
     "js4eos": "js4eos",
-    "js4eos_bg": "js4eos_bg"
+    "js4eos_bg": "js4eos_bg",
+    "bg_service": "bg_service"
   },
   "repository": "https://github.com/itleaks/js4eos",
   "scripts": {
