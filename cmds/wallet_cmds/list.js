@@ -6,9 +6,9 @@
 
 const Js4Eos = require('../../lib')
 
-exports.command = 'keys'
-exports.desc = 'list keys'
+exports.command = 'list'
+exports.desc = 'list wallet'
 exports.builder = {}
 exports.handler = function (argv) {
-    Js4Eos.getPublicKeys().then(ret => Js4Eos.printJson(ret));
+    Js4Eos.listWallet().then(ret => Js4Eos.printJson(ret));
 }

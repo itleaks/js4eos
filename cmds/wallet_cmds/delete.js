@@ -6,8 +6,8 @@
 
 const Js4Eos = require('../../lib')
 
-exports.command = 'import <key>'
-exports.desc = 'Import private key into wallet'
+exports.command = 'delete'
+exports.desc = 'delete wallet'
 exports.builder = yargs => yargs
     .options("n", {
         alias:'name',
@@ -19,5 +19,5 @@ exports.handler = function (argv) {
     if (!name) {
         name = 'default'
     }
-    Js4Eos.importKey(name, argv.key).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.deleteWallet(name).then(ret => Js4Eos.printJson(ret));
 }

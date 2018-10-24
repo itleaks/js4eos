@@ -8,11 +8,20 @@ const Js4Eos = require('../../lib')
 
 exports.command = 'unlock'
 exports.desc = 'unlock wallet'
-exports.builder = {}
+exports.builder = yargs => yargs
+    .options("n", {
+        alias:'name',
+        desc:"wallet name",
+        type:'string',
+    })
 exports.handler = function (argv) {
+    let name = argv.name
+    if (!name) {
+        name = 'default'
+    }
     var readline = require('readline-sync');
     var passwd = readline.question("passwd> ", {
         hideEchoBack: true // The typed text on screen is hidden by `*` (default).
     });
-    Js4Eos.unlockWallet(passwd).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.unlockWallet(name, passwd).then(ret => Js4Eos.printJson(ret));
 }

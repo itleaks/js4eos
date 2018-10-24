@@ -17,19 +17,28 @@ async function processReq(req, res) {
     wallet.resetTime();
     switch(page) {
         case "create":
-            ret = await wallet.create("" + query.passwd);
+            ret = await wallet.create("" + query.name, "" + query.passwd);
             return echoJson(res, ret)
         case "import":
-            ret = await wallet.importKey(query.key)
+            ret = await wallet.importKey(query.name, query.key)
             return echoJson(res, ret)
         case "keys":
             ret = await wallet.getPrivateKeysSync()
             return echoJson(res, ret)
         case "unlock":
-            ret = await wallet.unlock(query.passwd)
+            ret = await wallet.unlock(query.name, query.passwd)
+            return echoJson(res, ret)
+        case "lock":
+            ret = await wallet.lock(query.name)
+            return echoJson(res, ret)
+        case "list":
+            ret = await wallet.list()
+            return echoJson(res, ret)
+        case "delete":
+            ret = await wallet.delete(query.name)
             return echoJson(res, ret)
     }
-    return echoJson("")
+    return echoJson(res, "")
 }
 
 http.createServer(function (req, res) {
