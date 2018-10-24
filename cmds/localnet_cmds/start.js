@@ -11,8 +11,8 @@ var fs = require('fs');
 const Js4Eos = require('../../lib')
 const Config = require('../../lib').getConfig()
 
-const DEFAULT_PUB_KEY = 'EOS6UjW66Tob4k5an2tFf9ytCUJyQG3FnrX6LykCDeHPpznQ3Zbuj';
-const DEFAULT_PRI_KEY = '5JY1oKyPUby8SCnN8MzopfWp7SXU9KWUa2TWH3orncy9Unj4xDG';
+const DEFAULT_PUB_KEY = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV';
+const DEFAULT_PRI_KEY = '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3';
 const NODEOS_CMD_PREFIX = 'nodeos -e -p eosio --http-server-address 0.0.0.0:8888 --max-transaction-time=1000 --contracts-console --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin'
 
 exports.command = 'start [datadir]'
@@ -31,21 +31,25 @@ async function process(argv) {
 
 async function startNodeos(argv) {
     let keys = {};
-    if (argv.privatekey) {
-        keys.publicKey = await Js4Eos.privateToPublic(argv.privatekey)
-        keys.privateKey = argv.privatekey
+    if (false && argv.privatekey) {
+        if (argv.privatekey == MAGIC_KEY) {
+            keys = Js4Eos.createKey();
+        } else {
+            keys.publicKey = await Js4Eos.privateToPublic(argv.privatekey)
+            keys.privateKey = argv.privatekey
+        }
     } else {
-        keys = await Js4Eos.createKey();
+        keys = {
+            privateKey:DEFAULT_PRI_KEY,
+            publicKey:DEFAULT_PUB_KEY
+        };
     }
     let dataDir = argv.datadir
     if (!dataDir) {
         dataDir = Config.dataDir + "/nodeos"
     }
-    if (!fs.existsSync(dataDir)) {
-        fs.mkdirSync(dataDir, '0777', true)
-    }
     let logFile = dataDir + "/output.log"
-    let cmd = NODEOS_CMD_PREFIX + ' --hard-replay-blockchain --data-dir ' + dataDir + ' --private-key [' + keys.publicKey + ',' + keys.privateKey +'] > ' + logFile + ' 2>&1'
+    let cmd = NODEOS_CMD_PREFIX + ' --hard-replay-blockchain --config-dir ' + dataDir + ' --data-dir ' + dataDir + ' --private-key [' + keys.publicKey + ',' + keys.privateKey +'] > ' + logFile + ' 2>&1'
     // console.log(args)
     try {
         var daemon = require("daemonize2").setup({
