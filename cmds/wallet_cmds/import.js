@@ -14,14 +14,19 @@ exports.builder = yargs => yargs
         desc:"wallet name",
         type:'string',
     })
-exports.handler = function (argv) {
+
+async function process(argv) {
     let name = argv.name
     if (!name) {
         name = 'default'
     }
-    Js4Eos.importKey(name, argv.key).then(ret => {
-        if (ret) {
-            console.log("import success:", argv.key)
-        }
-    });
+    let ret = await Js4Eos.importKey(name, argv.key)
+    if (ret) {
+        let pubkey = await Js4Eos.privateToPublic(argv.key);
+        console.log("Import success:", pubkey);
+    }
+}
+
+exports.handler = function (argv) {
+    process(argv)
 }
