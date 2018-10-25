@@ -19,5 +19,9 @@ exports.handler = function (argv) {
     if (!name) {
         name = 'default'
     }
-    Js4Eos.importKey(name, argv.key).then(ret => Js4Eos.printJson(ret));
+    Js4Eos.importKey(name, argv.key).then(ret => {
+        if (ret) {
+            console.log("import success:", argv.key)
+        }
+    });
 }
