@@ -38,7 +38,7 @@ exports.handler = function (argv) {
     } else if (network in config.networks) {
         config.currentNetwork = network
     } else {
-        console.log("network not exist")
+        console.log("network " + network + " not exist")
         return;
     }
     if (argv.chainid) {
