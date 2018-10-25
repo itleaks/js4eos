@@ -9,8 +9,13 @@ js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和np
 ```
 npm install js4eos -g
 ```
-然后就可以使用js4eos执行EOS cleos程序的相似操作，比如
-ubuntu等linux OS上需要加上sudo
+然后就可以使用js4eos执行EOS cleos程序的相似操作<br>
+如果出错，请将npm, node都更新一下
+```
+npm install -g npm
+npm install -g node
+```
+ubuntu等linux OS上, 上面的'npm install' 前需要加sudo
 # 创建钱包
 js4eos只支持一个钱包，钱包可以管理很多key(账号)
 ```
@@ -24,13 +29,13 @@ js4eos wallet unlock
 # 创建新账号
 测试网络账号创建
 ```
-js4eos config set -n jungle
+js4eos config set --network jungle
 js4eos faucet accountxxx
 ```
 这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
 主网等其他网络创建请切换到对应网络
 ```
-js4eos config -n mainnet/kylin/fibos
+js4eos config --network mainnet/kylin/fibos
 js4eos faucet accountxxx
 ```
 # 导入账号私钥
@@ -41,7 +46,7 @@ js4eos wallet import keyxxx
 ```
 keyxxx 为前面账号生成时输出的privateKey
 # 编译智能合约
-目前只支持单个文件的编译。
+目前只支持单层目录合约编译
 合约目录结构为xxx/xxx.cpp
 ## 编译wasm程序
 ```
@@ -53,6 +58,14 @@ js4eos compile -o xxx.wasm xxx.cpp
 js4eos compile -g xxx.abi xxx.cpp
 ```
 编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
+# 购买ram
+hello合约大约需要52k ram
+前面通过faucet获取的账号是没有余额的，因此需要在下面网址免费获得EOS
+http://jungle.cryptolions.io/#faucet, 然后购买ram
+```
+js4eos system buyram acountxxx acountxxx "10.0000 EOS"
+```
+上面的.0000四个0不能省略
 # 部署智能合约
 ```
 js4eos set contract accountxxx xxx
@@ -60,15 +73,8 @@ js4eos set contract accountxxx xxx
 xxx是上面合约的目录，里面必须包含xxx.wasm和xxx.abi两个文件
 
 # 其他接口
-其他接口和EOS的cleos一模一样(包括参数名字传递方式)，比如
-## 创建私钥
-```
-js4eos create key
-```
-## 转账
-```
-js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
-```
+其他接口和EOS的cleos一模一样(包括参数名字传递方式)
+
 # 新增的接口
 js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以切换EOS网络。]可通过下面的命令来切换到不同网络
 ## 切换不同EOS链
@@ -117,6 +123,10 @@ js4eos wallet import xxxxx
 下面的EOS请使用上面的create key输出的公钥
 ```
 js4eos system newaccount --stake-net "0.0000 EOS" --stake-cpu "0.0000 EOS" --buy-ram-kbytes 3  createraccount somenewaccount EOSxxxxx... EOSxxxxx... -p createraccount
+```
+## 转账
+```
+js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
 ```
 ## 查询账号
 ```
