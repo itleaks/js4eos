@@ -105,7 +105,11 @@ js4eos config sync
 js4eos doc network
 ```
 # 水龙头(创建第一个账号)
-由于EOS操作的复杂性，任何一个EOS公链侧链账号注册是一个高门槛。因而js4eos配置了水龙头功能，只需执行js4eos faucet youraccount，"youraccount"为你要注册的新账号
+由于EOS操作的复杂性，任何一个EOS公链侧链账号注册是一个高门槛。因而js4eos配置了水龙头功能，只需执行
+```
+js4eos faucet accountxxx
+```
+这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
 
 # 常用命令解读
 下图的EOS请替换为具体网络的币符号
