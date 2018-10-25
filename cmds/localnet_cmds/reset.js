@@ -26,10 +26,16 @@ exports.builder = yargs => yargs
         desc:"private key",
         type:'string',
     })
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
  
 async function process(argv) {
     let killDone = false;
     var killNodeos = 'pkill -9 nodeos';
+    console.log("Killing old nodeos...")
     exec(killNodeos, function(err, stdout, stderr) {
         // console.log(err, stdout, stderr)
         startNodeos(argv);
@@ -37,6 +43,7 @@ async function process(argv) {
 }
 
 async function startNodeos(argv) {
+    await sleep(1500) //sleep 1.5s
     let keys = {};
     if (false && argv.privatekey) {
         if (argv.privatekey == MAGIC_KEY) {
