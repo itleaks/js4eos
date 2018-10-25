@@ -10,6 +10,7 @@ js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和np
 npm install js4eos -g
 ```
 然后就可以使用js4eos执行EOS cleos程序的相似操作，比如
+ubuntu等linux OS上需要加上sudo
 # 创建钱包
 js4eos只支持一个钱包，钱包可以管理很多key(账号)
 ```
@@ -20,39 +21,54 @@ js4eos的钱包是加密的，解锁前必须输入创建钱包时输出的密�
 ```
 js4eos wallet unlock
 ```
-# 创建私钥
+# 创建新账号
+测试网络账号创建
 ```
-js4eos create key
+js4eos config set -n jungle
+js4eos faucet accountxxx
 ```
-# 导入私钥
-导入私钥前必须解锁钱包
+这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
+主网等其他网络创建请切换到对应网络
+```
+js4eos config -n mainnet/kylin/fibos
+js4eos faucet accountxxx
+```
+# 导入账号私钥
+你要操作某个账号，必须导入该账号的私钥，导入私钥必须先解锁钱包
 ```
 js4eos wallet unlock （然后输入钱包的密码）
-js4eos wallet import key
+js4eos wallet import keyxxx
 ```
-# 转账
-```
-js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
-```
+keyxxx 为前面账号生成时输出的privateKey
 # 编译智能合约
 目前只支持单个文件的编译。
+合约目录结构为xxx/xxx.cpp
 ## 编译wasm程序
 ```
+cd xxx
 js4eos compile -o xxx.wasm xxx.cpp
 ```
 ## 生成abi文件
 ```
 js4eos compile -g xxx.abi xxx.cpp
 ```
+编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
 # 部署智能合约
 ```
-js4eos set contract xxx
+js4eos set contract accountxxx xxx
 ```
-xxx是目录，里面必须包含xxx.wasm和xxx.abi两个文件
+xxx是上面合约的目录，里面必须包含xxx.wasm和xxx.abi两个文件
 
 # 其他接口
-其他接口和EOS的cleos一模一样(包括参数名字传递方式)
-
+其他接口和EOS的cleos一模一样(包括参数名字传递方式)，比如
+## 创建私钥
+```
+js4eos create key
+```
+## 转账
+```
+js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
+```
 # 新增的接口
 js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以切换EOS网络。]可通过下面的命令来切换到不同网络
 ## 切换不同EOS链
