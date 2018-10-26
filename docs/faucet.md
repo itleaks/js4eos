@@ -1,8 +1,9 @@
 # Mainnet主网
 ## 创建账号
-主网没有免费账号，大家可以在下面网页有偿创建账号
-https://eosfavor.com/newaccount
-
+主网没有免费账号，大家可以在下面网页有偿创建账号 <br>
+https://eosfavor.com/newaccount <br>
+whaleex和meet.one联合”免费账号注册“活动入口在下面，具体是否真的免费需自己咨询及判断<br>
+https://whaleex.zendesk.com/hc/zh-cn/articles/360018574991
 # ENU牛油果网络
 ## 创建免费账号
 TokenPocket钱包可以免费创建
