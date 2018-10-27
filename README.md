@@ -35,7 +35,7 @@ js4eos faucet accountxxx
 这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
 主网等其他网络创建请切换到对应网络
 ```
-js4eos config --network mainnet/kylin/fibos
+js4eos config set --network mainnet/kylin/fibos
 js4eos faucet accountxxx
 ```
 # 导入账号私钥
@@ -50,6 +50,7 @@ keyxxx 为前面账号生成时输出的privateKey
 合约目录结构为xxx/xxx.cpp
 ## 编译wasm程序
 ```
+#编译需要网络，请保持网络畅通
 cd xxx
 js4eos compile -o xxx.wasm xxx.cpp
 ```
@@ -60,7 +61,7 @@ js4eos compile -g xxx.abi xxx.cpp
 编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
 # 购买ram
 hello合约大约需要52k ram
-前面通过faucet获取的账号是没有余额的，因此需要在下面网址免费获得EOS
+前面通过faucet获取的jungle测试账号是没有余额的，因此需要在下面网址免费获得EOS
 http://jungle.cryptolions.io/#faucet, 然后购买ram
 ```
 js4eos system buyram acountxxx acountxxx "10.0000 EOS"
