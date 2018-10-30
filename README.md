@@ -163,3 +163,13 @@ js4eos system undelegatebw payer receiver "0.0000 EOS" "0.1000 EOS"
 js4eos set contract xxx/xxx/contract_name
 ```
 contract_name目录下需要有contract_name.abi和contract_name.wasm两个文件
+## windows兼容问题
+没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
+```
+js4eos push action youraccount hi '["youraccount"]' -p youraccount
+```
+需要更改为
+```
+js4eos push action youraccount hi "[""youraccount""]" -p youraccount
+```
+引号需要"需要增加一个"来转义即""
