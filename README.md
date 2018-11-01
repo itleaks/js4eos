@@ -5,7 +5,7 @@
 js4eos is a Command Line javascript Application for EOS<br>
 js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。
 
-# 安装js4eos
+# 安装(install) js4eos
 ```
 npm install js4eos -g
 ```
@@ -16,17 +16,17 @@ npm install -g npm
 npm install -g node
 ```
 ubuntu等linux OS上, 上面的'npm install' 前需要加sudo
-# 创建钱包
+# 创建钱包(create wallet)
 js4eos只支持一个钱包，钱包可以管理很多key(账号)
 ```
 js4eos wallet create
 ```
-# 解锁钱包
+# 解锁钱包(unlock wallet)
 js4eos的钱包是加密的，解锁前必须输入创建钱包时输出的密码
 ```
 js4eos wallet unlock
 ```
-# 创建新账号
+# 创建新账号(create new account)
 测试网络账号创建
 ```
 js4eos config set --network jungle
@@ -38,28 +38,28 @@ js4eos faucet accountxxx
 js4eos config set --network mainnet/kylin/fibos
 js4eos faucet accountxxx
 ```
-# 导入账号私钥
+# 导入账号私钥(import private key of account)
 你要操作某个账号，必须导入该账号的私钥，导入私钥必须先解锁钱包
 ```
 js4eos wallet unlock （然后输入钱包的密码）
 js4eos wallet import keyxxx
 ```
 keyxxx 为前面账号生成时输出的privateKey
-# 编译智能合约
+# 编译智能合约(compile contract)
 目前只支持单层目录合约编译
 合约目录结构为xxx/xxx.cpp
-## 编译wasm程序
+## 编译wasm程序(compile wasm)
 ```
 #编译需要网络，请保持网络畅通
 cd xxx
 js4eos compile -o xxx.wasm xxx.cpp
 ```
-## 生成abi文件
+## 生成abi文件(generate abi)
 ```
 js4eos compile -g xxx.abi xxx.cpp
 ```
 编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
-# 购买ram
+# 购买ram(buyram)
 hello合约大约需要52k ram
 前面通过faucet获取的jungle测试账号是没有余额的，因此需要在下面网址免费获得EOS
 http://jungle.cryptolions.io/#faucet, 然后购买ram
@@ -67,7 +67,7 @@ http://jungle.cryptolions.io/#faucet, 然后购买ram
 js4eos system buyram acountxxx acountxxx "10.0000 EOS"
 ```
 上面的.0000四个0不能省略
-# 部署智能合约
+# 部署智能合约(deploy contract)
 ```
 js4eos set contract accountxxx xxx
 ```
@@ -78,7 +78,7 @@ xxx是上面合约的目录，里面必须包含xxx.wasm和xxx.abi两个文件
 
 # 新增的接口
 js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以切换EOS网络。]可通过下面的命令来切换到不同网络
-## 切换不同EOS链
+## 切换不同EOS链(switch network)
 比如在测试网络jungle,kylin麒麟和主网之间切换
 ```
 js4eos config set --network mainnet/kylin/jungle/enu/fibos
@@ -116,6 +116,49 @@ js4eos doc network
 js4eos faucet accountxxx
 ```
 这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
+
+# 常见问题
+## key问题
+出现下面提示，表示你没有导入私钥(需要js4eos wallet import)或者钱包已经锁定(需要js4eos wallet unlock)
+js4eos的钱包只有30分钟缓存时间，30分钟无操作需要再次unlock
+```
+missing key, check your keyprovider
+```
+如果导入私钥或者unlock还是不工作，可以通过如下命令重置钱包
+```
+js4eos wallet delete
+js4eos wallet create
+js4eos wallet import xxx
+```
+## 网络问题
+出现fetchError
+```
+{ FetchError: request to
+```
+需要检测是否有网络或者需要更换节点
+```
+js4eos config choose url
+```
+## 编译问题
+js4eos compile 需要网络，请保持电脑网络通畅
+## 错误无解时
+错误无解时可以通过如下命令来恢复
+```
+#(ubuntu等需要sudo)
+npm install -g js4eos
+js4eos config reset
+js4eos config sync
+```
+## windows兼容问题
+没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
+```
+js4eos push action youraccount hi '["youraccount"]' -p youraccount
+```
+需要更改为
+```
+js4eos push action youraccount hi "[""youraccount""]" -p youraccount
+```
+引号需要"需要增加一个"来转义即""
 
 # 常用命令解读
 下图的EOS请替换为具体网络的币符号
@@ -169,45 +212,28 @@ js4eos set contract xxx/xxx/contract_name
 ```
 contract_name目录下需要有contract_name.abi和contract_name.wasm两个文件
 
-## 常见问题
-## key问题
-出现下面提示，表示你没有导入私钥(需要js4eos wallet import)或者钱包已经锁定(需要js4eos wallet unlock)
-js4eos的钱包只有30分钟缓存时间，30分钟无操作需要再次unlock
+## 选择节点
+由于httpendpoint有时可能会失效，我们可以切换节点
 ```
-missing key, check your keyprovider
+$ js4eos config choose url
+Choose one httpEndpoint for mainnet:
+	*[0] http://bp.cryptolions.io:8888
+	 [1] https://mainnet.genereos.io
+	 [2] https://mainnet.meet.one
+	 [3] http://mainnet.eoscalgary.io
+please input[0~3]>
 ```
-如果导入私钥或者unlock还是不工作，可以通过如下命令重置钱包
+## 选择网络
+用户可能不了解网络的名字，可以通过列表选择方式切换网络
 ```
-js4eos wallet delete
-js4eos wallet create
-js4eos wallet import xxx
+$ js4eos config choose network
+Choose one network:
+	*[0] mainnet
+	 [1] localnet
+	 [2] eosforce
+	 [3] jungle
+	 [4] kylin
+	 [5] enu
+	 [6] fibos
+please input[0~NaN]>
 ```
-## 网络问题
-出现fetchError
-```
-{ FetchError: request to
-```
-需要检测是否有网络或者需要更换节点
-```
-js4eos config choose url
-```
-## 编译问题
-js4eos compile 需要网络，请保持电脑网络通畅
-## 错误无解时
-错误无解时可以通过如下命令来恢复
-```
-#(ubuntu等需要sudo)
-npm install -g js4eos
-js4eos config reset
-js4eos config sync
-```
-### windows兼容问题
-没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
-```
-js4eos push action youraccount hi '["youraccount"]' -p youraccount
-```
-需要更改为
-```
-js4eos push action youraccount hi "[""youraccount""]" -p youraccount
-```
-引号需要"需要增加一个"来转义即""
