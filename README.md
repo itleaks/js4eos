@@ -99,6 +99,11 @@ js4eos config  set --network mainnet --chainid=aca376f206b8fc25a6ed44dbdc66547c3
 ```
 js4eos config sync
 ```
+## 重置配置
+有时修改配置导致配置信息错误，可以通过reset命令修复
+```
+js4eos config reset
+```
 # 文档查看(EOS网络切换文档)
 目前js4eos支持主网，EosForce, 测试网络，ENU和FIBOS也在整理即将支持。切换网络就是修改chainid和httpEndpoint,具体操作详情请使用doc network命令查看
 
@@ -163,7 +168,40 @@ js4eos system undelegatebw payer receiver "0.0000 EOS" "0.1000 EOS"
 js4eos set contract xxx/xxx/contract_name
 ```
 contract_name目录下需要有contract_name.abi和contract_name.wasm两个文件
-## windows兼容问题
+
+## 常见问题
+## key问题
+出现下面提示，表示你没有导入私钥(需要js4eos wallet import)或者钱包已经锁定(需要js4eos wallet unlock)
+js4eos的钱包只有30分钟缓存时间，30分钟无操作需要再次unlock
+```
+missing key, check your keyprovider
+```
+如果导入私钥或者unlock还是不工作，可以通过如下命令重置钱包
+```
+js4eos wallet delete
+js4eos wallet create
+js4eos wallet import xxx
+```
+## 网络问题
+出现fetchError
+```
+{ FetchError: request to
+```
+需要检测是否有网络或者需要更换节点
+```
+js4eos config choose url
+```
+## 编译问题
+js4eos compile 需要网络，请保持电脑网络通畅
+## 错误无解时
+错误无解时可以通过如下命令来恢复
+```
+#(ubuntu等需要sudo)
+npm install -g js4eos
+js4eos config reset
+js4eos config sync
+```
+### windows兼容问题
 没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
 ```
 js4eos push action youraccount hi '["youraccount"]' -p youraccount

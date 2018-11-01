@@ -45,7 +45,15 @@ exports.handler = function (argv) {
         config.networks[config.currentNetwork].chainId = argv.chainid;
     }
     if (argv.url) {
+        let httpEndpoints = config.networks[config.currentNetwork].httpEndpoints
+        if (!httpEndpoints) {
+            httpEndpoints = []
+        }
         config.networks[config.currentNetwork].httpEndpoint = argv.url;
+        if (httpEndpoints.indexOf(argv.url) == -1) {
+            httpEndpoints.push(argv.url)
+            config.networks[config.currentNetwork].httpEndpoints = httpEndpoints
+        }
     }
 
     if (argv.keyprefix) {
