@@ -26,7 +26,7 @@ async function process(argv) {
         i++
     }
     var readline = require('readline-sync');
-    var input = readline.question("please input[0~" + (config.networks.length-1) + "]> ");
+    var input = readline.question("please input[0~" + (networks.length-1) + "]> ");
     try {
         let index = parseInt(input)
         if (index < 0 || index > i-1) {

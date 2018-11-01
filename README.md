@@ -235,5 +235,5 @@ Choose one network:
 	 [4] kylin
 	 [5] enu
 	 [6] fibos
-please input[0~NaN]>
+please input[0~6]>
 ```
