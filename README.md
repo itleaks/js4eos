@@ -54,9 +54,17 @@ keyxxx 为前面账号生成时输出的privateKey
 cd xxx
 js4eos compile -o xxx.wasm xxx.cpp
 ```
+如果是采用eosio.cdt规范的智能合约，请用compile2
+```
+js4eos compile2 -o xxx.wasm xxx.cpp
+```
 ## 生成abi文件(generate abi)
 ```
 js4eos compile -g xxx.abi xxx.cpp
+```
+如果是采用eosio.cdt规范的智能合约，请用compile2, 并指定contract类名
+```
+js4eos compile2 -g xxx.abi xxx.cpp --contract contractclass
 ```
 编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
 # 购买ram(buyram)
