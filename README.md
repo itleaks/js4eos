@@ -245,3 +245,7 @@ Choose one network:
 	 [6] fibos
 please input[0~6]>
 ```
+# Contact
+Feel free to add my wechat:itleaks<br>
+有任何问题，可以加我微信:itleaks<br>
+<img src="https://raw.githubusercontent.com/itleaks/eos-contract/master/files/weixin.png" width=220 height=224 /><br>
