@@ -15,7 +15,7 @@ const MAGIC_KEY = '0'
 
 const DEFAULT_PUB_KEY = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV';
 const DEFAULT_PRI_KEY = '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3';
-const NODEOS_CMD_PREFIX = 'nodeos -e -p eosio --http-server-address 0.0.0.0:8888 --max-transaction-time=1000 --contracts-console --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin'
+const NODEOS_CMD_PREFIX = 'nodeos -e -p eosio --verbose-http-errors --http-server-address 0.0.0.0:8888 --max-transaction-time=1000 --contracts-console --plugin eosio::chain_api_plugin --plugin eosio::history_api_plugin'
 
 exports.command = 'reset [datadir]'
 exports.desc = 'reset local eos network'
