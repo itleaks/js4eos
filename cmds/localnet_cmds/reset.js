@@ -38,7 +38,11 @@ async function process(argv) {
     console.log("Killing old nodeos...")
     exec(killNodeos, function(err, stdout, stderr) {
         // console.log(err, stdout, stderr)
-        startNodeos(argv);
+        startNodeos(argv).then(function(value) {
+                // fulfillment
+           }, function(reason) {
+                console.log(reason)
+         });
     })
 }
 
@@ -58,17 +62,27 @@ async function startNodeos(argv) {
             publicKey:DEFAULT_PUB_KEY
         };
     }
+
     let dataDir = argv.datadir
     if (!dataDir) {
         dataDir = Config.dataDir + "/nodeos"
     }
     if (!fs.existsSync(dataDir)) {
-        fs.unlinkSync(dataDir);
-        fs.mkdirSync(dataDir, '0777', true)
+        try {
+            fs.unlinkSync(dataDir);
+        } catch(e) {
+        }
+        try {
+            fs.mkdirSync(dataDir, '0777', true)
+        } catch(e) {
+            console.log(e)
+        }
     }
+
     let logFile = dataDir + "/output.log"
     let cmd = NODEOS_CMD_PREFIX + ' --delete-all-blocks  --config-dir ' + dataDir + ' --data-dir ' + dataDir + ' --private-key ["' + keys.publicKey + '","' + keys.privateKey +'"] > ' + logFile + ' 2>&1'
     // console.log(args)
+
     try {
         var daemon = require("daemonize2").setup({
             main: "bg_service",
