@@ -43,7 +43,13 @@ async function handle() {
 
   setTimeout(() => {
     try {
-      process.kill(pid, 'SIGHUP');
+      var isWin = process.platform === "win32"
+      if (isWin) {
+        var exec = require('child_process').exec
+        exec("taskkill /f /pid " + pid)
+      } else {
+        process.kill(pid, 'SIGHUP');
+      }
       setTimeout(() => {
         try {
           deleteall(require('path').join(require('os').homedir(), ".js4eos"));
