@@ -41,6 +41,11 @@ async function processReq(req, res) {
     return echoJson(res, "")
 }
 
+process.on('SIGHUP', function() {
+  console.log('Got SIGHUP signal');
+  process.exit(0)
+});
+
 http.createServer(function (req, res) {
     processReq(req, res)
 }).listen(5555);

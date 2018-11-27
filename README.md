@@ -157,6 +157,17 @@ npm install -g js4eos
 js4eos config reset
 js4eos config sync
 ```
+如还有问题,执行如下操作，如下操作会删除钱包等文件
+```
+npm install -g js4eos
+js4eos reset
+```
+如果还有问题，请手工杀死js4eos_bg进程，然后执行
+```
+npm install -g js4eos
+js4eos reset
+```
+如果还是有问题请报issue或者添加微信itleaks
 ## windows兼容问题
 没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
 ```
