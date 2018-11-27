@@ -24,15 +24,13 @@ http://faucet.cryptokylin.io/get_token?xxxx
 "xxx"替换为你的账号
 
 # jungle测试网络
+jungle网络已停用，切到了Jungle2
 ## 创建免费账号
-```
-js4eos config set -n jungle
-js4eos faucet anewaccount1
-```
+https://monitor.jungletestnet.io/#account
 
 ## 免费获得Token
 浏览器输入
-http://jungle.cryptolions.io/#faucet
+https://monitor.jungletestnet.io/#faucet
 填入账号即可
 
 # FIBOS
