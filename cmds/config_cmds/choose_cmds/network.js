@@ -29,7 +29,7 @@ async function process(argv) {
     var input = readline.question("please input[0~" + (networks.length-1) + "]> ");
     try {
         let index = parseInt(input)
-        if (index < 0 || index > i-1) {
+        if (!index || index < 0 || index > i-1) {
             console.log("index must be 0~" + i)
             return;
         }

@@ -14,14 +14,22 @@ exports.builder = yargs => yargs
         desc:"wallet name",
         type:'string',
     })
+    .options("p", {
+        alias:'password',
+        desc:"wallet password",
+        type:'string',
+    })
 exports.handler = function (argv) {
     let name = argv.name
     if (!name) {
         name = 'default'
     }
-    var readline = require('readline-sync');
-    var passwd = readline.question("passwd> ", {
-        hideEchoBack: true // The typed text on screen is hidden by `*` (default).
-    });
+    let passwd = argv.password
+    if (!passwd) {
+        var readline = require('readline-sync');
+        passwd = readline.question("passwd> ", {
+            hideEchoBack: true // The typed text on screen is hidden by `*` (default).
+        });
+    }
     Js4Eos.unlockWallet(name, passwd).then(ret => Js4Eos.printJson(ret));
 }
