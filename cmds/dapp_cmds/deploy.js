@@ -40,7 +40,6 @@ async function deploy(argv) {
 
         let wasmFile = path.join(contractDir, argv.contract + ".wasm");
         let abiFile = path.join(contractDir, argv.contract + ".abi");
-
         Js4Eos = Js4Eos({
             network:config.networks[network],
             keyProvider:config.keyProvider
