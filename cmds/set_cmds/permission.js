@@ -10,8 +10,8 @@ exports.command = 'account permission <account> <permission> <authority> [parent
 exports.desc = 'set permission'
 exports.builder = {}
 exports.handler = function (argv) {
-    console.log(argv.account)
-    console.log(argv.permission)
+    // console.log(argv.account)
+    // console.log(argv.permission)
 
     if (argv.permission != 'active') {
         console.log('only support update active permission')

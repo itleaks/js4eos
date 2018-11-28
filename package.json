@@ -1,6 +1,6 @@
 {
   "name": "js4eos",
-  "version": "1.2.9",
+  "version": "1.3.0",
   "license": "MIT",
   "preferGlobal": true,
   "main": "index.js",
@@ -23,10 +23,12 @@
     "archiver": "^3.0.0",
     "daemonize2": "^0.4.2",
     "eosjs": "16.0.6",
+    "mocha": "^5.2.0",
     "open": "^0.0.5",
     "query-string": "^6.2.0",
     "readline-sync": "^1.4.9",
     "request": "^2.88.0",
+    "unzip": "^0.1.11",
     "yargs": "^7.0.2"
   }
 }
