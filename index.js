@@ -17,6 +17,12 @@ function actorCall(contract) {
     }
 }
 
+function tableCall(contract) {
+    return async(table, scope, table_key, lower_bound, upper_bound, limit, key_type, index_position) => {
+        return await Js4eos.getTable(contract.account, scope, table, table_key, lower_bound, upper_bound, limit, key_type, index_position)
+    }
+}
+
 async function requireContract(name, network) {
     var configFile = path.join(process.cwd(), "js4eos_config.js")
     if (!fs.existsSync(configFile)) {
@@ -46,6 +52,7 @@ async function requireContract(name, network) {
     let contractAccount = config.deploy[name][network]
     var Contract = {account:contractAccount}
     Contract.setActor = actorCall(Contract)
+    Contract.table = tableCall(Contract)
     for (let action of abi.actions) {
         Contract[action.name] = actionCall(Contract, action.name)
     }
@@ -61,6 +68,7 @@ async function contract(account) {
     var abi = ret.abi;
     var Contract = {account}
     Contract.setActor = actorCall(Contract)
+    Contract.table = tableCall(Contract)
     for (let action of abi.actions) {
         Contract[action.name] = actionCall(Contract, action.name)
     }
