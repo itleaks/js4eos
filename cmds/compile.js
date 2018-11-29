@@ -22,6 +22,9 @@ exports.builder = yargs => yargs
 exports.handler = function (argv) {
     if (argv.g) {
       Js4Eos.compile(argv.file, argv.g, {flag:'g'}).then(data => {
+        if (!data) {
+          return;
+        }
         console.log(data.stderr);
         console.log(data.stdout);
         console.log("Saving to", data.file);
@@ -29,6 +32,9 @@ exports.handler = function (argv) {
     }
     if (argv.o) {
       Js4Eos.compile(argv.file, argv.o, {flag:'o'}).then(data => {
+        if (!data) {
+          return;
+        }
         console.log(data.stderr);
         console.log(data.stdout);
         console.log("Saving to", data.file);

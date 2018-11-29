@@ -153,18 +153,18 @@ js4eos compile 需要网络，请保持电脑网络通畅
 错误无解时可以通过如下命令来恢复
 ```
 #(ubuntu等需要sudo)
-npm install -g js4eos
+npm install -g js4eos@latest
 js4eos config reset
 js4eos config sync
 ```
 如还有问题,执行如下操作，如下操作会删除钱包等文件
 ```
-npm install -g js4eos
+npm install -g js4eos@latest
 js4eos reset
 ```
 如果还有问题，请手工杀死js4eos_bg进程，然后执行
 ```
-npm install -g js4eos
+npm install -g js4eos@latest
 js4eos reset
 ```
 如果还是有问题请报issue或者添加微信itleaks

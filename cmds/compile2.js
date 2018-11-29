@@ -30,7 +30,11 @@ exports.handler = function (argv) {
         console.log("must given contract name with --contract")
         return;
       }
+
       Js4Eos.compile(argv.file, argv.g, {flag:'g2',contract:argv.contract}).then(data => {
+        if (!data) {
+          return;
+        }
         console.log(data.stderr);
         console.log(data.stdout);
         console.log("Saving to", data.file);
@@ -38,6 +42,9 @@ exports.handler = function (argv) {
     }
     if (argv.o) {
       Js4Eos.compile(argv.file, argv.o, {flag:'o2'}).then(data => {
+        if (!data) {
+          return;
+        }
         console.log(data.stderr);
         console.log(data.stdout);
         console.log("Saving to", data.file);
