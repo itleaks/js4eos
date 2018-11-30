@@ -20,9 +20,14 @@ try {
     daemon.on('started', () => {
       startCmd();
     });
+    daemon.on('error', () => {
+      console.log("on error of js4eos_bg")
+      startCmd();
+    });
   } else {
     startCmd();
   }
 } catch(e) {
+  console.log("start js4eos_bg error")
+  startCmd();
 }
-// startCmd();
