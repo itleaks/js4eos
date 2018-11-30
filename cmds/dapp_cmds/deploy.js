@@ -47,17 +47,25 @@ async function deploy(argv) {
         if (!config.eosio_cdt) {
             console.log("Compile wasm for", sourceFile)
             let ret = await Js4Eos.compile(sourceFile, wasmFile, {flag:'o'})
-            console.log(ret.stderr, ret.stdout)
+            if (ret) {
+                console.log(ret.stderr, ret.stdout)
+            }
             console.log("Generated abi for", sourceFile)
             ret = await Js4Eos.compile(sourceFile, abiFile, {flag:'g'})
-            console.log(ret.stderr, ret.stdout)
+            if (ret) {
+                console.log(ret.stderr, ret.stdout)
+            }
         } else {
             console.log("Compile wasm for", sourceFile)
             let ret = await Js4Eos.compile(sourceFile, wasmFile, {flag:'o2'})
-            console.log(ret.stderr, ret.stdout)
+            if (ret) {
+                console.log(ret.stderr, ret.stdout)
+            }
             console.log("Generated abi for", sourceFile)
             ret = await Js4Eos.compile(sourceFile, abiFile, {flag:'g2', contract:argv.contract})
-            console.log(ret.stderr, ret.stdout)
+            if (ret) {
+                console.log(ret.stderr, ret.stdout)
+            }
         }
         ret = await Js4Eos.setContract(contractAccount, contractDir)
         Js4Eos.printTransaction(ret)

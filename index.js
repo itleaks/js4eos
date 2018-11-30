@@ -84,6 +84,7 @@ function createJs4Eos(options) {
     Config.setNetwork(options.network)
     Config.setKeyProvider(options.keyProvider)
     var lib = require('./lib')
+    lib.ResetEos();
     lib.RequireContract = requireContract
     lib.Contract = contract
     return lib
