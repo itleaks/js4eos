@@ -35,6 +35,8 @@ js4eos dapp deploy hello
 ```
 js4eos dapp test
 ```
+### 更多信息
+<a href='https://blog.csdn.net/ITleaks/article/details/84645002' target=_blank>点击查看</a>
 # 创建钱包(create wallet)
 js4eos只支持一个钱包，钱包可以管理很多key(账号)
 ```
