@@ -58,4 +58,4 @@ process.on('SIGHUP', function() {
 
 http.createServer(function (req, res) {
     processReq(req, res)
-}).listen(5555);
+}).listen(5555, "127.0.0.1");
