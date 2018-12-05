@@ -199,7 +199,8 @@ js4eos push action youraccount hi '["youraccount"]' -p youraccount
 ```
 js4eos push action youraccount hi "[""youraccount""]" -p youraccount
 ```
-引号需要"需要增加一个"来转义即""
+引号需要"需要增加一个"来转义即""<br>
+<a href='https://blog.csdn.net/ITleaks/article/details/83651513'>推荐使用vscode，vscode的powershell非常好用,点击查看</a>
 
 # 常用命令解读(common commands)
 下图的EOS请替换为具体网络的币符号
