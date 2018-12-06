@@ -9,6 +9,7 @@ js4eos本身也是一个EOS智能合约测试网络，类似以太坊下的Truff
 npm install js4eos -g
 ```
 然后就可以使用js4eos执行EOS cleos程序的相似操作<br>
+js4eos最新版本已增加较多功能，如你已安装js4eos，也强烈推荐你执行上述命令更新js4eos<br>
 如果出错，请将npm, node都更新一下
 ```
 npm install -g npm
@@ -27,11 +28,21 @@ js4eos dapp init
 ```
 js4eos dapp create anewcontract
 ```
-### 编译部署智能合约(deploy contract)
+### 编译智能合约(compile contract)
+```
+js4eos dapp compile hello
+```
+### 部署智能合约(deploy contract)
 ```
 js4eos dapp deploy hello
 ```
 ### 测试合约(test hello contract)
+只测试hello contract<br>
+'-g hi'指只测试包含'hi'描述的测试用例,由于只有test/hello.js包含'hi'描述，因而只会测试hello contract
+```
+js4eos dapp test -g hi
+```
+测试全部
 ```
 js4eos dapp test
 ```

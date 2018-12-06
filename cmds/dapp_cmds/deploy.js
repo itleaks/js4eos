@@ -27,11 +27,6 @@ async function deploy(argv) {
         }
 
         let contractDir = path.join("./contracts", argv.contract)
-        let sourceFile = path.join(contractDir, argv.contract + ".cpp");
-        if (!fs.existsSync(sourceFile)) {
-            console.log("contract source file " + sourceFile + " not exist")
-            return;
-        }
         let contractAccount = config.deploy[argv.contract][network]
         if (!contractAccount) {
             console.log("No contract account, please set in js4eos_config.js")
@@ -44,28 +39,10 @@ async function deploy(argv) {
             network:config.networks[network],
             keyProvider:config.keyProvider
         })
-        if (!config.eosio_cdt) {
-            console.log("Compile wasm for", sourceFile)
-            let ret = await Js4Eos.compile(sourceFile, wasmFile, {flag:'o'})
-            if (ret) {
-                console.log(ret.stderr, ret.stdout)
-            }
-            console.log("Generated abi for", sourceFile)
-            ret = await Js4Eos.compile(sourceFile, abiFile, {flag:'g'})
-            if (ret) {
-                console.log(ret.stderr, ret.stdout)
-            }
-        } else {
-            console.log("Compile wasm for", sourceFile)
-            let ret = await Js4Eos.compile(sourceFile, wasmFile, {flag:'o2'})
-            if (ret) {
-                console.log(ret.stderr, ret.stdout)
-            }
-            console.log("Generated abi for", sourceFile)
-            ret = await Js4Eos.compile(sourceFile, abiFile, {flag:'g2', contract:argv.contract})
-            if (ret) {
-                console.log(ret.stderr, ret.stdout)
-            }
+        if (!fs.existsSync(wasmFile)) {
+            console.log("No wasmFile", wasmFile)
+            console.log("please run 'js4eos dapp compile " + argv.contract + "' firstly")
+            return;
         }
         ret = await Js4Eos.setContract(contractAccount, contractDir)
         Js4Eos.printTransaction(ret)
