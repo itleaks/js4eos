@@ -10,8 +10,8 @@ function startCmd() {
 try {
    var daemon = require("daemonize2").setup({
     main: "js4eos_bg",
-    name: "js4eos_bg",
-    pidfile: require('path').join(require('os').homedir(), ".js4eos_bg.pid"),
+    name: "js4eos_bg2",
+    pidfile: require('path').join(require('os').homedir(), ".js4eos_bg2.pid"),
   });
   var pid = daemon.status();
   if (!pid) {
@@ -21,13 +21,13 @@ try {
       startCmd();
     });
     daemon.on('error', () => {
-      console.log("on error of js4eos_bg")
+      console.log("on error of js4eos_bg2")
       startCmd();
     });
   } else {
     startCmd();
   }
 } catch(e) {
-  console.log("start js4eos_bg error")
+  console.log("start js4eos_bg2 error")
   startCmd();
 }

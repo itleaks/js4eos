@@ -147,6 +147,11 @@ js4eos faucet accountxxx
 这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
 
 # 常见问题(Problems)
+出现问题第一步请执行如下命令更新js4eos
+```
+npm install -g js4eos
+```
+如还没解决请尝试下面的方法
 ## key问题
 出现下面提示，表示你没有导入私钥(需要js4eos wallet import)或者钱包已经锁定(需要js4eos wallet unlock)
 js4eos的钱包只有30分钟缓存时间，30分钟无操作需要再次unlock
@@ -155,6 +160,7 @@ missing key, check your keyprovider
 ```
 如果导入私钥或者unlock还是不工作，可以通过如下命令重置钱包
 ```
+js4eos wallet stop
 js4eos wallet delete
 js4eos wallet create
 js4eos wallet import xxx

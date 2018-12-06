@@ -10,7 +10,7 @@ exports.desc = 'stop wallet daemon'
 exports.builder = {}
 
 function handle() {
-  bgpidFile = require('path').join(require('os').homedir(), ".js4eos_bg.pid")
+  bgpidFile = require('path').join(require('os').homedir(), ".js4eos_bg2.pid")
   var pid = 0;
   if (fs.existsSync(bgpidFile)) {
     try {
