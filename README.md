@@ -210,13 +210,13 @@ js4eos reset
 ## windows兼容问题(windows compatible issue)
 没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
 ```
-js4eos push action youraccount hi '["youraccount"]' -p youraccount
+js4eos push action eosio.token transfer '["youraccount", "account2", "1.0000 EOS", "test"]' -p youraccount
 ```
 需要更改为(change to below)
 ```
-js4eos push action youraccount hi "[""youraccount""]" -p youraccount
+js4eos push action eosio.token transfer "[""youraccount"", ""account2"", ""1.0000 EOS"", ""test""]" -p youraccount
 ```
-引号需要"需要增加一个"来转义即""<br>
+引号"需要增加一个"来转义即""<br>
 <a href='https://blog.csdn.net/ITleaks/article/details/83651513'>推荐使用vscode，vscode的powershell非常好用,点击查看</a>
 
 # 常用命令解读(common commands)
