@@ -1,7 +1,7 @@
 # js4eos
 
 js4eos is a Command Line javascript Application for EOS<br>
-js4eos is also a Test Framework for EOS Contract just like truffle on ethereum<br>
+js4eos is also a EOS Test Framework for Smart Contract just like truffle on ethereum<br>
 js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。<br>
 js4eos本身也是一个EOS智能合约测试网络，类似以太坊下的Truffle
 # 安装(install) js4eos
