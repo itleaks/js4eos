@@ -11,12 +11,19 @@ var Utils = require("../../lib/utils")
 
 exports.command = 'init'
 exports.desc = 'init a eos dapp project'
-exports.builder = {}
-
-const ZIP_DIR = 'js4eos-demo-master'
+exports.builder = yargs => yargs
+.options("v", {
+    alias:"version",
+    desc:"init a vscode demo application",
+    type:'string',
+    default:'master',
+})
+const ZIP_DIR_PREFIX = 'js4eos-demo-'
 async function handle(argv) {
-    console.log("Downloading", Js4Eos.getConfig().appdemourl)
-    await Utils.downloadFile(Js4Eos.getConfig().appdemourl, './tmp.zip');
+    let url = Js4Eos.getConfig().appdemourl2 + "/" + argv.version + ".zip"
+    console.log("Downloading", url)
+    await Utils.downloadFile(url, './tmp.zip');
+    var ZIP_DIR = ZIP_DIR_PREFIX + argv.version;
     fs.createReadStream('./tmp.zip').pipe(unzip.Extract({ path: './' })).on('close', function () {
         files = fs.readdirSync(ZIP_DIR);
 		files.forEach(function(file, index) {
@@ -48,5 +55,5 @@ async function handle(argv) {
 }
 
 exports.handler = function (argv) {
-    handle()
+    handle(argv)
 }
