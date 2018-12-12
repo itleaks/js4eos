@@ -23,6 +23,9 @@ ubuntu等linux OS上, 上面的'npm install' 前需要加sudo
 mkdir js4eos-dapp
 cd js4eos-dapp
 js4eos dapp init
+or
+// a version support IDE 'vscode'
+js4eos dapp init -v vscode
 ```
 ### 新增合约(create contract)
 ```
@@ -187,7 +190,7 @@ js4eos config choose url
 ```
 ## 编译问题(compile issue)
 compile needs network if no compiler in local
-js4eos compile 需要网络，请保持电脑网络通畅
+如果本地没有eosio-cpp编译器环境，js4eos compile 需要网络，请保持电脑网络通畅
 ## 错误无解时(what to when no idea)
 错误无解时可以通过如下命令来恢复
 ```
