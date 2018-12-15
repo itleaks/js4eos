@@ -220,6 +220,11 @@ js4eos push action eosio.token transfer '["youraccount", "account2", "1.0000 EOS
 js4eos push action eosio.token transfer "[""youraccount"", ""account2"", ""1.0000 EOS"", ""test""]" -p youraccount
 ```
 引号"需要增加一个"来转义即""<br>
+如果是vscode下的powershell则需要使用 \ 来转义, 上述命令需更改为如下
+```
+js4eos push action eosio.token transfer '[\"youraccount\", \"account2\", \"1.0000 EOS\", \"test\"]' -p youraccount
+```
+如果是使用其他window命令行，请自己尝试上述三种方式
 <a href='https://blog.csdn.net/ITleaks/article/details/83651513'>推荐使用vscode，vscode的powershell非常好用,点击查看</a>
 
 # 常用命令解读(common commands)
