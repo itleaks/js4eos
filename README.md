@@ -211,7 +211,8 @@ js4eos reset
 ```
 如果还是有问题请报issue或者添加微信itleaks
 ## windows兼容问题(windows compatible issue)
-没有安装mingwin或cygwin等类linux终端环境的用户，如果命令行直接执行js4eos,有些输入需要转义，比如
+不推荐在mingwin或cygwin等linux模拟器下使用js4eos，可能会出现问题
+windows下命令行执行js4eos,有些输入需要转义，比如
 ```
 js4eos push action eosio.token transfer '["youraccount", "account2", "1.0000 EOS", "test"]' -p youraccount
 ```
