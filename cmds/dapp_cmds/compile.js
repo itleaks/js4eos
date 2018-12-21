@@ -32,6 +32,10 @@ async function compile(argv) {
             console.log("contract source file " + sourceFile + " not exist")
             return;
         }
+        if (!config.deploy[argv.contract]) {
+            console.log("Please add deploy config for contract '", argv.contract, "' in js4eos_config.js")
+            return;
+        }
         let contractAccount = config.deploy[argv.contract][network]
         if (!contractAccount) {
             console.log("No contract account, please set in js4eos_config.js")
