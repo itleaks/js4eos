@@ -1,287 +1,236 @@
 # js4eos
 
-js4eos is a Command Line javascript Application for EOS<br>
-js4eos is also a EOS Test Framework for Smart Contract just like truffle on ethereum<br>
-js4eos是一个javascript命令行程序, 包含一个可执行程序js4eos和npm库js4eos。可执行程序js4eos类似EOS的cleos, 完全一样的命令及参数传递方式，以命令行的方式执行EOS命令,一键安装即可立即使用，跨平台，极大降低了EOS使用操作的门槛。同时通过js4eos的npm库，js开发人员能非常简便的开发操作EOS。<br>
-js4eos本身也是一个EOS智能合约测试网络，类似以太坊下的Truffle
-# 安装(install) js4eos
+js4eos is a javascript Command Line  Application for EOS. All commands are same as cleos. You don't need to build eos or setup a eos docker.<br>
+js4eos is also a Testing Framework for EOS Smart Contract just like truffle on ethereum<br>
+<a href='https://github.com/itleaks/js4eos/blob/master/README_zh.md'>中文请点击这里</a>
+# install js4eos
 ```
 npm install js4eos -g
 ```
-然后就可以使用js4eos执行EOS cleos程序的相似操作<br>
-js4eos最新版本已增加较多功能，如你已安装js4eos，也强烈推荐你执行上述命令更新js4eos<br>
-如果出错，请将npm, node都更新一下
+update node if there is a error when install js4eos
 ```
 npm install -g npm
 npm install -g node
 ```
-ubuntu等linux OS上, 上面的'npm install' 前需要加sudo
-# js4eos合约测试框架
-### Contract Test Framework
-### 初始化一个合约应用(initail a contract application)
-```
-mkdir js4eos-dapp
-cd js4eos-dapp
-js4eos dapp init
-or
-// a version support IDE 'vscode'
-js4eos dapp init -v vscode
-```
-### 新增合约(create contract)
-```
-js4eos dapp create anewcontract
-```
-### 编译智能合约(compile contract)
-```
-js4eos dapp compile hello
-```
-### 部署智能合约(deploy contract)
-```
-js4eos dapp deploy hello
-```
-### 测试合约(test hello contract)
-只测试hello contract<br>
-'-g hi'指只测试包含'hi'描述的测试用例,由于只有test/hello.js包含'hi'描述，因而只会测试hello contract
-```
-js4eos dapp test -g hi
-```
-测试全部
-```
-js4eos dapp test
-```
-### 更多信息
-<a href='https://blog.csdn.net/ITleaks/article/details/84645002' target=_blank>点击查看</a>
-# 创建钱包(create wallet)
-js4eos只支持一个钱包，钱包可以管理很多key(账号)
+you may add sudo in linux-based operation
+
+# create wallet
+create default wallet
 ```
 js4eos wallet create
 ```
-# 解锁钱包(unlock wallet)
-js4eos的钱包是加密的，解锁前必须输入创建钱包时输出的密码
+create another wallet
+```
+js4eos wallet create -n name
+```
+# unlock wallet
+unlock wallet before any operation.<br>
+You don't need to unlock again in 30 minutes.
 ```
 js4eos wallet unlock
 ```
-# 创建新账号(create new account)
-测试网络账号创建
+# create the first account
+## jungle testnet
 ```
 js4eos config set --network jungle
 js4eos faucet accountxxx
 ```
-这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
-主网等其他网络创建请切换到对应网络
+accountxxx is the new account name，length 12, and must be 'a-z，1-5'<br>
+you can switch to other network to create your first account
 ```
 js4eos config set --network mainnet/kylin/fibos
 js4eos faucet accountxxx
 ```
-# 导入账号私钥(import private key of account)
-你要操作某个账号，必须导入该账号的私钥，导入私钥必须先解锁钱包
+## import private key of account
+you must import the private key of a account before using this account.
+private key only exists in local ram, and only encrypted key saves to file.
 ```
-js4eos wallet unlock （然后输入钱包的密码）
+js4eos wallet unlock （then please input password of wallet）
 js4eos wallet import keyxxx
 ```
-keyxxx 为前面账号生成时输出的privateKey
-# 编译智能合约(compile contract)
-目前只支持单层目录合约编译
-合约目录结构为xxx/xxx.cpp
-## 编译wasm程序(compile wasm)
+keyxxx is the private key of account you want to operate.
+# compile contract
+
+## compile wasm
+this will run offline if there is a local compiler, or will run online.
 ```
-#编译需要网络，请保持网络畅通
 cd xxx
 js4eos compile -o xxx.wasm xxx.cpp
 ```
-如果是采用eosio.cdt规范的智能合约，请用compile2
+use compile2 if your code follows eosio.cdt rule.
 ```
 js4eos compile2 -o xxx.wasm xxx.cpp
 ```
-## 生成abi文件(generate abi)
+## generate abi
 ```
 js4eos compile -g xxx.abi xxx.cpp
 ```
-如果是采用eosio.cdt规范的智能合约，请用compile2, 并指定contract类名
+code with cdt rule
 ```
 js4eos compile2 -g xxx.abi xxx.cpp --contract contractclass
 ```
-编译完成后xxx目录下有xxx.cpp, xxx.abi, xxx.wasm三个文件
-# 购买ram(buyram)
-hello合约大约需要52k ram
-前面通过faucet获取的jungle测试账号是没有余额的，因此需要在下面网址免费获得EOS
-http://jungle.cryptolions.io/#faucet, 然后购买ram
+you will find three files xxx.cpp, xxx.abi, xxx.wasm in folder 'xxx'
+# buyram
+hello contract needs almost 52k ram<br>
+you can get free eos for your account in jungle network. <br>
+http://jungle.cryptolions.io/#faucet <br>
+then buyram for your account to deploy a contract
 ```
 js4eos system buyram acountxxx acountxxx "10.0000 EOS"
 ```
-上面的.0000四个0不能省略
-# 部署智能合约(deploy contract)
+must keep four decimal places. '.0000'
+# deploy contract
 ```
 js4eos set contract accountxxx xxx
 ```
-xxx是上面合约的目录，里面必须包含xxx.wasm和xxx.abi两个文件
+ensure xxx.wasm and xxx.abi have already exist in folder 'xxx'
 
-# 其他接口
-其他接口和EOS的cleos一模一样(包括参数名字传递方式)
+# other commands
+all commands are same with that of cleos
 
-# 新增的接口
-js4eos config, 该接口用来设置系统配置，比如主网nodeos节点服务信息，网络chainid。通过该命令可以切换EOS网络。]可通过下面的命令来切换到不同网络
-## 切换不同EOS链(switch network)
-比如在测试网络jungle,kylin麒麟和主网之间切换
+# new apis
+js4eos config
+## switch network
+for example, switch between mainnet/kylin/jungle/enu/fibos networks
 ```
 js4eos config set --network mainnet/kylin/jungle/enu/fibos
 ```
 
-## 修改当前网络参数（比如chainid, httpend的url)
-以下命令会更改当前网络的参数
+## change chainid, httpendpoint
+change chainid, httpendpoint of current network
 ```
 js4eos config  set --chainid=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 --url=http://bp.cryptolions.io:8888
 ```
-## 切换网络，同时修改该网络的参数(change network)
-下面命令就会切换到mainnnet网络并且修改该网络参数
+## change chainid, httpendpoint, network
+change network, and then change chainid, httpEndpoint of this network
 ```
 js4eos config  set --network mainnet --chainid=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906 --url=http://bp.cryptolions.io:8888
 ```
-## 同步网络信息(sync configuration)
-由于httpendpoint有时可能会失效，我们的服务器会不定时更新节点信息，所以本地需要时可以通过config sync来同步
+## sync configuration
+We maintain well-work httpEndpoints, so you can sync the newest configuration file with below command.
 ```
 js4eos config sync
 ```
-## 重置配置(reset configuration)
-有时修改配置导致配置信息错误，可以通过reset命令修复
+## reset configuration
+you may come across some issues, and then you can try reset configuration to fix it.
 ```
 js4eos config reset
 ```
-# 文档查看(EOS网络切换文档)
-目前js4eos支持主网，EosForce, 测试网络，ENU和FIBOS也在整理即将支持。切换网络就是修改chainid和httpEndpoint,具体操作详情请使用doc network命令查看
+# view documents
 
 ```
 js4eos doc network
 ```
-# 水龙头(创建第一个账号,First account)
-由于EOS操作的复杂性，任何一个EOS公链侧链账号注册是一个高门槛。因而js4eos配置了水龙头功能，只需执行
-```
-js4eos faucet accountxxx
-```
-这个 accountxxx 为你想要创建的新账号， 必须是12个字符，每个字符只能是a-z，1-4<br>
 
-# 常见问题(Problems)
-出现问题第一步请执行如下命令更新js4eos
+# issues
+update js4eos firstly with below command if you run into a problem.
 ```
 npm install -g js4eos
 ```
-如还没解决请尝试下面的方法
-## key问题
-出现下面提示，表示你没有导入私钥(需要js4eos wallet import)或者钱包已经锁定(需要js4eos wallet unlock)
-js4eos的钱包只有30分钟缓存时间，30分钟无操作需要再次unlock
+Try below solutions if the issue is still not fixed.
+## key problem
+unlock wallet if encounter below problem.
 ```
 missing key, check your keyprovider
 ```
-如果导入私钥或者unlock还是不工作，可以通过如下命令重置钱包
+you can reset wallet if the issue is still going.
 ```
 js4eos wallet stop
 js4eos wallet delete
 js4eos wallet create
 js4eos wallet import xxx
 ```
-## 网络问题(network problem)
-出现fetchError
+## network problem
+check network or httpEndpoint if it is 'fetch error'
 ```
 { FetchError: request to
 ```
-需要检测是否有网络或者需要更换节点(change httpendpoint)
+change httpEndpoint
 ```
 js4eos config choose url
 ```
-## 编译问题(compile issue)
-compile needs network if no compiler in local
-如果本地没有eosio-cpp编译器环境，js4eos compile 需要网络，请保持电脑网络通畅
-## 错误无解时(what to when no idea)
-错误无解时可以通过如下命令来恢复
+## compile issue
+compile needs network if no local compiler
+## how to do when have no idea
+firstly,
+reset config and sync config
 ```
 #(ubuntu等需要sudo)
 npm install -g js4eos@latest
 js4eos config reset
 js4eos config sync
 ```
-如还有问题,执行如下操作，如下操作会删除钱包等文件
+secondly,
+reset all if above solution not work
 ```
 npm install -g js4eos@latest
 js4eos reset
 ```
-如果还有问题，请手工杀死js4eos_bg进程，然后执行
-```
-npm install -g js4eos@latest
-js4eos reset
-```
-如果还是有问题请报issue或者添加微信itleaks
-## windows兼容问题(windows compatible issue)
-不推荐在mingwin或cygwin等linux模拟器下使用js4eos，可能会出现问题
-windows下命令行执行js4eos,有些输入需要转义，比如
+finally, restart you machine.Report a issue in github or contact wechat:itleaks
+## windows compatible issue
+Not recommended to use js4eos in mingwin or cygwin.Pleas use powershell or normal terminal of windows.
+You may need to escape quote of a command.For example
 ```
 js4eos push action eosio.token transfer '["youraccount", "account2", "1.0000 EOS", "test"]' -p youraccount
 ```
-需要更改为(change to below)
+you need replace '"' to '""' in normal terminal
 ```
 js4eos push action eosio.token transfer "[""youraccount"", ""account2"", ""1.0000 EOS"", ""test""]" -p youraccount
 ```
-引号"需要增加一个"来转义即""<br>
-如果是vscode下的powershell则需要使用 \ 来转义, 上述命令需更改为如下
+you need add '\' in PowerShell
 ```
 js4eos push action eosio.token transfer '[\"youraccount\", \"account2\", \"1.0000 EOS\", \"test\"]' -p youraccount
 ```
-如果是使用其他window命令行，请自己尝试上述三种方式
-<a href='https://blog.csdn.net/ITleaks/article/details/83651513'>推荐使用vscode，vscode的powershell非常好用,点击查看</a>
 
-# 常用命令解读(common commands)
-下图的EOS请替换为具体网络的币符号
-比如ENU网络替换为ENU，fibos替换为FO
-## 生成公私钥
+<a href='https://blog.csdn.net/ITleaks/article/details/83651513'>vscode is recommendded</a>
+
+# More commands
+## create keys
 ```
 js4eos create key
 ```
-## 导入私钥
+## import key
 ```
 js4eos wallet import xxxxx
 ```
-导入私钥，才能执行该私钥对应的账号写操作，比如抵押CPU,NET等
-## 创建账号
-下面的EOS请使用上面的create key输出的公钥
+## create a new account
 ```
 js4eos system newaccount --stake-net "0.0000 EOS" --stake-cpu "0.0000 EOS" --buy-ram-kbytes 3  createraccount somenewaccount EOSxxxxx... EOSxxxxx... -p createraccount
 ```
-## 转账
+## transfer
 ```
 js4eos push action eosio.token transfer '["itleakstoken", "itleakstokem", "10.0000 EOS", "test"]' -p itleakstoken
 ```
-## 查询账号
+## get account info
 ```
 js4eos get account youraccount
 ```
-## 购买RAM
+## buy ram
 ```
 js4eos system buyram payer receiver "0.0001 EOS"
 ```
-## 出售RAM
+## sell RAM
 ```
 js4eos system sellram payer bytes
 ```
-## 抵押CPU,NET
+## delegate CPU,NET
 ```
 js4eos system delegatebw payer receiver "0.0000 EOS" "0.1000 EOS"
 ```
-第一个(0.0000 EOS)是net抵押量,第二个(0.1000 EOS)是cpu抵押量
-你必须有payer账号的操作权限
-## 取消抵押
+the first "0.0000 EOS" is network, and the second "0.1000 EOS" is cpu
+## undelegate
 ```
 js4eos system undelegatebw payer receiver "0.0000 EOS" "0.1000 EOS"
 ```
-第一个(0.0000 EOS)是net抵押量,第二个(0.100 EOS)是cpu抵押量
-你必须有payer账号的操作权限
 
-## 部署合约
+## deploy contract
 ```
 js4eos set contract xxx/xxx/contract_name
 ```
-contract_name目录下需要有contract_name.abi和contract_name.wasm两个文件
+contract_name.abi and contract_name.wasm must exist
 
-## 选择节点(choose httpendpoint)
-由于httpendpoint有时可能会失效，我们可以切换节点
+## choose httpendpoint
+httpendpoint may halt, and you can change to another endpoint.
 ```
 $ js4eos config choose url
 Choose one httpEndpoint for mainnet:
@@ -291,8 +240,7 @@ Choose one httpEndpoint for mainnet:
 	 [3] http://mainnet.eoscalgary.io
 please input[0~3]>
 ```
-## 选择网络(choose network)
-用户可能不了解网络的名字，可以通过列表选择方式切换网络
+## choose network
 ```
 $ js4eos config choose network
 Choose one network:
@@ -305,7 +253,42 @@ Choose one network:
 	 [6] fibos
 please input[0~6]>
 ```
+# Eos Testing framework
+js4eos is also a testing framework
+### initail a contract application
+```
+mkdir js4eos-dapp
+cd js4eos-dapp
+js4eos dapp init
+or
+// a version support IDE 'vscode'
+js4eos dapp init -v vscode
+```
+### create contract
+```
+js4eos dapp create anewcontract
+```
+### compile contract
+```
+js4eos dapp compile hello
+```
+### deploy contract
+```
+js4eos dapp deploy hello
+```
+### test hello contract
+Only test hello test units with option '-g'
+'-g hi' means grep pattern 'hi' and then test
+```
+js4eos dapp test -g hi
+```
+test all test
+```
+js4eos dapp test
+```
+### Configure your dapp
+Configuration of dapp is in file "js4eos_config.js"<br>
+please modify this configuration to change deploy config such as deploy account.
 # Contact
 Feel free to add my wechat:itleaks<br>
-有任何问题，可以加我微信:itleaks<br>
 <img src="https://raw.githubusercontent.com/itleaks/eos-contract/master/files/weixin.png" width=220 height=224 /><br>
