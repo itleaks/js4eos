@@ -1,6 +1,6 @@
 {
   "name": "js4eos",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "license": "MIT",
   "preferGlobal": true,
   "main": "index.js",
