@@ -25,7 +25,7 @@
     "daemonize2": "^0.4.2",
     "eosjs": "16.0.6",
     "mocha": "^5.2.0",
-    "open": "^0.0.5",
+    "open": ">=6.0.0",
     "query-string": "^6.2.0",
     "readline-sync": "^1.4.9",
     "request": "^2.88.0",
