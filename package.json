@@ -1,6 +1,6 @@
 {
   "name": "js4eos",
-  "version": "1.5.9",
+  "version": "1.6.2",
   "license": "MIT",
   "preferGlobal": true,
   "main": "index.js",
@@ -23,7 +23,7 @@
     "archiver": "^3.0.0",
     "command-exists": "^1.2.8",
     "daemonize2": "^0.4.2",
-    "eosjs": "16.0.6",
+    "eosjs": "16.0.8",
     "mocha": "^5.2.0",
     "open": ">=6.0.0",
     "query-string": "^6.2.0",

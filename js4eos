@@ -8,7 +8,8 @@ function startCmd() {
   .argv
 }
 try {
-   var daemon = require("daemonize2").setup({
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  var daemon = require("daemonize2").setup({
     main: "js4eos_bg",
     name: "js4eos_bg2",
     pidfile: require('path').join(require('os').homedir(), ".js4eos_bg2.pid"),
